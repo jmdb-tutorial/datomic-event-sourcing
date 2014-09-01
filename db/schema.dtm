@@ -1,0 +1,39 @@
+[
+  ;; customers
+
+  { :db/id #db/id[:db.part/db]
+    :db/ident :customer/email
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db/fulltext true
+    :db/unique :db.unique/value
+    :db/doc "A customer's email address - the key to finding customers"
+    :db.install/_attribute :db.part/db}
+
+  { :db/id #db/id[:db.part/db]
+    :db/ident :customer/name
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db/fulltext true
+    :db.install/_attribute :db.part/db}
+
+  { :db/id #db/id[:db.part/db]
+    :db/ident :customer/address-line-1
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db.install/_attribute :db.part/db}
+
+  { :db/id #db/id[:db.part/db]
+    :db/ident :customer/address-town
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db.install/_attribute :db.part/db}
+
+  { :db/id #db/id[:db.part/db]
+    :db/ident :customer/address-postcode
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db.install/_attribute :db.part/db}
+
+
+]
