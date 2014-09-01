@@ -1,4 +1,21 @@
 [
+  ;; Transaction meta-data to describe "events"
+
+  { :db/id #db/id[:db.part/db]
+    :db/ident :x-event/type
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db/doc "Type of the event which caused the change"
+    :db.install/_attribute :db.part/db}
+ 
+  { :db/id #db/id[:db.part/db]
+    :db/ident :x-event/user-id
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db/doc "The user id of the person creating the event"
+    :db.install/_attribute :db.part/db}
+
+
   ;; customers
 
   { :db/id #db/id[:db.part/db]
