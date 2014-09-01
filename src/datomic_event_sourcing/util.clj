@@ -8,7 +8,14 @@
 
 (defn transact-entity
   [conn tempid tx]
-  (get-inserted-entity tempid @(d/transact conn tx)))
+  (get-inserted-entity tempid @(d/transact conn tx meta-data)))
+
+(defn record-event
+  [conn tempid tx event-type user-id]
+  (let [txid (d/tempid :db.part/tx)]
+    (get-inserted-entity tempid 
+                         @(d/transact conn 
+                                      (conj tx {:db/id txid :x-event/type event-type :x-event/user-id user-id})))))
 
 
 (defn changeset-for [entity-id db]
@@ -51,4 +58,10 @@
                 changes))
      :timestamp (->> (ffirst changes)
                      (d/entity (d/as-of db (ffirst changes)))
-                     :db/txInstant)}))))
+                     :db/txInstant)
+     :event-type (->> (ffirst changes)
+                     (d/entity (d/as-of db (ffirst changes)))
+                     :x-event/type)
+     :user-id (->> (ffirst changes)
+                     (d/entity (d/as-of db (ffirst changes)))
+                     :x-event/user-id)}))))
