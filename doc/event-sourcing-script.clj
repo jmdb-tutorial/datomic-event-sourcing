@@ -1,4 +1,4 @@
-(ns datomic-event-sourcing.database
+(ns datomic-event-sourcing.script
   (:require [datomic.api :as d]
             [datomic-event-sourcing.util :as util]))
 
@@ -13,9 +13,6 @@
 
 (def schema-tx (read-string (slurp "db/schema.dtm")))
 @(d/transact conn schema-tx)
-
-;;(def data-tx (read-string (slurp "db/sample-data.dtm")))
-;;@(d/transact conn data-tx)
 
 (let [tempid (d/tempid :db.part/user)]
   (def customer-bob
@@ -40,7 +37,7 @@
 (def db (d/db conn))
 
 
-(util/changeset-for entity-id db)
+(util/changeset-for customer-bob-id db)
 
 
 
