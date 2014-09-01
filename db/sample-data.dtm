@@ -1,4 +1,0 @@
-[
-{:db/id #db/id[:db.part/user -1000001], :customer/email "bob@bob.com", :customer/name "Bob McBob", :customer/address-line-1 "1 Some Street", :customer/address-town "Some Town", :customer/address-postcode "PP3 2RE"}
-{:db/id #db/id[:db.part/user -1000002], :customer/address-line-1 "2 Some Other Street", :customer/address-town "Some New Town", :customer/address-postcode "QQ5 2TG"}
-]
