@@ -32,13 +32,12 @@
 (util/record-event
  conn
  customer-bob-id
- [[:db/add customer-bob-id :customer/address-line-1 "2 Some New Street"]
-  [:db/add customer-bob-id :customer/address-town "Some New Town"]
-  [:db/add customer-bob-id :customer/address-postcode "GH45 2SD"]]
+ [{:db/id customer-bob-id 
+   :customer/address-line-1 "2 Some New Street"
+   :customer/address-town "Some New Town"
+   :customer/address-postcode "GH45 2SD"}]
   "change-address"
   "jennybar")
 
-(def db (d/db conn))
 
-
-(util/changeset-for customer-bob-id db)
+(util/changeset-for customer-bob-id (d/db conn))
