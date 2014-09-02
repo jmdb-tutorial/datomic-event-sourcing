@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js" lang="en" ng-app>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Customer Management</title>
-    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/foundation.css"/>
     <script type="text/javascript" src="js/vendor/modernizr.js"></script>
     <script type="text/javascript" src="js/vendor/angular-1.0.8.min.js"></script>
     <script type="text/javascript" src="js/http-angular.js"></script>
@@ -18,38 +18,59 @@
 </div>
 
 <div class="row">
-        <table ng-model="customer">
-            <tbody>
-                <tr><td>Id</td><td>{{customer['id']}}</td></tr>
-                <tr><td>Name</td><td>{{customer['name']}}</td></tr>
-                <tr><td>Email</td><td>{{customer['email']}}</td></tr>
-                <tr><td>Address Line 1</td><td>{{customer['address-line-1']}}</td></tr>
-                <tr><td>Town</td><td>{{customer['town']}}</td></tr>
-                <tr><td>Postcode</td><td>{{customer['postcode']}}</td></tr>
-            </tbody>
-        </table>
+    <table ng-model="customer">
+        <tbody>
+        <tr>
+            <td>Id</td>
+            <td>{{customer['id']}}</td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>{{customer['name']}}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{customer['email']}}</td>
+        </tr>
+        <tr>
+            <td>Address Line 1</td>
+            <td>{{customer['address-line-1']}}</td>
+        </tr>
+        <tr>
+            <td>Town</td>
+            <td>{{customer['town']}}</td>
+        </tr>
+        <tr>
+            <td>Postcode</td>
+            <td>{{customer['postcode']}}</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <div class="row">
     <h4>History</h4>
-<table>
-    <thead>
-    <td>Event</td>
-    <td>User Id</td>
-    <td>Timestamp</td>
-    <td>Changes</td>
-    </thead>
-    <tbody>
+    <table>
+        <thead>
+        <tr>
+            <th>Event</th>
+            <th>User Id</th>
+            <th>Timestamp</th>
+            <th>Changes</th>
+        </tr>
+        </thead>
 
-    <tr ng-repeat="event in history">
-        <td>{{event['type']}}</a></td>
-        <td>{{event['user-id']}}</a></td>
-        <td>{{event['timestamp']}}</td>
-        <td>{{event['changes']}}</td>
-    </tr>
+        <tbody>
 
-    </tbody>
-</table>
+        <tr ng-repeat="event in history">
+            <td>{{event['type']}}</a></td>
+            <td>{{event['user-id']}}</a></td>
+            <td>{{event['timestamp']}}</td>
+            <td>{{event['changes']}}</td>
+        </tr>
+
+        </tbody>
+    </table>
 </div>
 
 <div class="row">

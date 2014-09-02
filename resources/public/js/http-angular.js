@@ -18,10 +18,16 @@ function logResponse(response) {
     console.log(stringResponse);
 }
 
-function POST($http, url, data, successFn) {
+function POST($http, url, data, successCallback) {
     logPOSTRequest(url, data);
     $http.post(url, data).success(function (response) {
         //logResponse(response);
-        successFn(response);
+        successCallback(response);
+    });
+}
+
+function GET($http, url, successCallback) {
+    $http.get(url).success(function (response) {
+        successCallback(response);
     });
 }

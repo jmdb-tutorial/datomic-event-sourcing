@@ -11,7 +11,7 @@
 
 (defroutes app-routes
   (GET "/" request (redirect "/index.html"))
-  (GET "/api/" request (v/index request))
+  (GET "/api" request (v/index request))
   (route/resources "/")
 
   (context "/api/customers" []

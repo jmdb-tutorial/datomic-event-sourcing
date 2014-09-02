@@ -7,8 +7,13 @@ var testCustomers = [
     {"id" : "4", "name" : "4", "email" : "xx@xx.1", "address-line-1" : "add1", "town" : "XXXX", "postcode" : "XX00 0XX"}]
 
 
+function loadCustomers($http, $scope) {
+    GET($http, "/api/customers", function(response) {
+        $scope.customerList = response["items"];
+    })
+}
 
 function CustomerListController($scope, $http) {
-    $scope.customerList = testCustomers;
+    loadCustomers($http, $scope);
 }
 
