@@ -10,18 +10,19 @@
   (:gen-class))
 
 (defroutes app-routes
-  (GET "/" request (v/index request))
+  (GET "/" request (redirect "/index.html"))
+  (GET "/api/" request (v/index request))
   (route/resources "/")
 
-  (context "/customers" []
+  (context "/api/customers" []
            (defroutes customers-routes
              (GET "/" request (v/get-customers request))))
 
-  (context "/customers/:id" [id]
+  (context "/api/customers/:id" [id]
            (defroutes customer-route
              (GET "/" request (v/get-customer id request))))
 
-  (context "/history/:id" [id]
+  (context "/api/history/:id" [id]
            (defroutes history-route
              (GET "/" request (v/get-history id request))))
 
