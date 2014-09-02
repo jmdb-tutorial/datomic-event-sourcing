@@ -1,13 +1,16 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" ng-app>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Customer Management</title>
     <link rel="stylesheet" href="css/foundation.css" />
-    <script src="js/vendor/modernizr.js"></script>
+    <script type="text/javascript" src="js/vendor/modernizr.js"></script>
+    <script type="text/javascript" src="js/vendor/angular-1.0.8.min.js"></script>
+    <script type="text/javascript" src="js/http-angular.js"></script>
+    <script type="text/javascript" src="js/customer.js"></script>
 </head>
-<body>
+<body ng-controller="CustomerController">
 <div class="row">
     <div class="large-12 columns">
         <h1>Welcome to our customer management system</h1>
@@ -17,6 +20,7 @@
 <div class="row">
         <table ng-model="customer">
             <tbody>
+                <tr><td>Id</td><td>{{customer['id']}}</td></tr>
                 <tr><td>Name</td><td>{{customer['name']}}</td></tr>
                 <tr><td>Email</td><td>{{customer['email']}}</td></tr>
                 <tr><td>Address Line 1</td><td>{{customer['address-line-1']}}</td></tr>
@@ -37,7 +41,7 @@
     </thead>
     <tbody>
 
-    <tr ng-repeat="event in eventList">
+    <tr ng-repeat="event in history">
         <td>{{event['type']}}</a></td>
         <td>{{event['user-id']}}</a></td>
         <td>{{event['timestamp']}}</td>
