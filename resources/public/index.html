@@ -1,0 +1,51 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Management</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <script src="js/vendor/modernizr.js"></script>
+</head>
+<body>
+<div class="row">
+    <div class="large-12 columns">
+        <h1>Welcome to our customer management system</h1>
+    </div>
+</div>
+
+<div class="row">
+
+        <table>
+            <thead>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Address Line 1</td>
+            <td>Town</td>
+            <td>Postcode</td>
+            <td></td>
+            </thead>
+            <tbody>
+
+            <tr ng-repeat="customer in customerList">
+                <td>{{customer['name']}}</a></td>
+                <td>{{customer['email']}}</a></td>
+                <td>{{customer['address-line-1']}}</td>
+                <td>{{customer['town']}}</td>
+                <td>{{customer['postcode']}}</td>
+                <td><a href="./customer.html?id={{customer['id']}}">View</a></td>
+            </tr>
+
+            </tbody>
+        </table>
+
+
+</div>
+
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation.min.js"></script>
+<script>
+    $(document).foundation();
+</script>
+</body>
+</html>

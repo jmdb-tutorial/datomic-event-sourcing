@@ -1,0 +1,57 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Management</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <script src="js/vendor/modernizr.js"></script>
+</head>
+<body>
+<div class="row">
+    <div class="large-12 columns">
+        <h1>Welcome to our customer management system</h1>
+    </div>
+</div>
+
+<div class="row">
+        <table ng-model="customer">
+            <tbody>
+                <tr><td>Name</td><td>{{customer['name']}}</td></tr>
+                <tr><td>Email</td><td>{{customer['email']}}</td></tr>
+                <tr><td>Address Line 1</td><td>{{customer['address-line-1']}}</td></tr>
+                <tr><td>Town</td><td>{{customer['town']}}</td></tr>
+                <tr><td>Postcode</td><td>{{customer['postcode']}}</td></tr>
+            </tbody>
+        </table>
+</div>
+
+<div class="row">
+    <h4>History</h4>
+<table>
+    <thead>
+    <td>Event</td>
+    <td>User Id</td>
+    <td>Timestamp</td>
+    <td>Changes</td>
+    </thead>
+    <tbody>
+
+    <tr ng-repeat="event in eventList">
+        <td>{{event['type']}}</a></td>
+        <td>{{event['user-id']}}</a></td>
+        <td>{{event['timestamp']}}</td>
+        <td>{{event['changes']}}</td>
+    </tr>
+
+    </tbody>
+</table>
+</div>
+
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation.min.js"></script>
+<script>
+    $(document).foundation();
+</script>
+</body>
+</html>
