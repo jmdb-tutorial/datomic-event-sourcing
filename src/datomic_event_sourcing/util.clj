@@ -1,6 +1,9 @@
 (ns datomic-event-sourcing.util
   (:require [datomic.api :as d]))
 
+(defn delete-db [uri]
+  (d/delete-database uri))
+
 
 (defn get-inserted-entity
   [tempid tx-res]
