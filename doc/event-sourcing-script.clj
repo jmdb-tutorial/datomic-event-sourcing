@@ -1,5 +1,6 @@
 (ns datomic-event-sourcing.script
-  (:require [datomic.api :as d]
+  (:use [clojure.pprint])
+  (:require [datomic.api :as d]            
             [datomic-event-sourcing.util :as util]))
 
 
@@ -40,4 +41,10 @@
   "jennybar")
 
 
-(util/changeset-for customer-bob-id (d/db conn))
+(pprint (util/changeset-for customer-bob-id (d/db conn)))
+
+(def bob (d/entity (d/db conn) customer-bob-id))
+
+(:customer/address-line-1 bob)
+
+

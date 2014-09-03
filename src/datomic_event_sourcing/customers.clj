@@ -2,7 +2,11 @@
   (:require [datomic.api :as d]
             [datomic-event-sourcing.util :as util]))
 
-(def uri "datomic:mem//customer-management")
+(def uri "datomic:mem://customer-management")
+
+(defn destroy-customer-db []
+  (if (not (d/create-database uri))
+    (d/delete-database uri)))
 
 (defn initialise-customer-db []
   (d/create-database uri)
@@ -38,9 +42,36 @@
        "change-address"
        user-id))))
 
-(defn find-customer-by-id [customer-id]
-  (println "got to find by id"))
+(defn map-customer [entity]
+  (array-map :is "customer"
+             :id (:db/id entity)
+             :name (:customer/name entity)
+             :email (:customer/email entity)
+             :address-line-1 (:customer/address-line-1 entity)
+             :town (:customer/address-town entity)
+             :postcode (:customer/address-postcode entity)))
+
+(defn map-history [changes-col]
+  (let [items (map (fn [item]
+                     (array-map :type (:event-type item)
+                                :user-id (:user-id item)
+                                :timestamp (:timestamp item)
+                                :changes (:changes item)))
+                   changes-col)]
+    (array-map :is ["event" "list"]
+               :numberOfItems (count items)
+               :items items)))
+
+(defn get-all-customers []
+  (let [conn (d/connect uri)]
+    (map map-customer (sort-by :customer/email (util/decorate-results (d/q '[:find ?c :where [?c :customer/email _]] (d/db conn)) conn)))))
+
+(defn get-customer-by-id [customer-id]
+  (let [conn (d/connect uri)]
+    (map-customer (d/entity (d/db conn customer-id)))))
 
 (defn get-customer-history [customer-id]
   (let [conn (d/connect uri)]
     (util/changeset-for customer-id (d/db conn))))
+
+

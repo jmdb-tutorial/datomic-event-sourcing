@@ -68,3 +68,17 @@
      :user-id (->> (ffirst changes)
                      (d/entity (d/as-of db (ffirst changes)))
                      :x-event/user-id)}))))
+
+(defn decorate 
+  "Simple function to pull out all the attributes of an entity into a map"
+  [id conn]
+  
+  (let [ db (d/db conn)
+         e (d/entity db id)]
+    (conj (select-keys e (keys e)) {:db/id id})))
+
+(defn decorate-results 
+  "maps through a result set where each item is a single entity id and decorates it"
+  [r conn]
+  (map #(decorate (first %) conn) r))
+
