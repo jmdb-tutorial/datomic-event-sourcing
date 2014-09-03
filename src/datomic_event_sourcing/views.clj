@@ -32,8 +32,7 @@
   (response (->> (c/get-customer-by-id (read-string id))
                  (add-customer-links request))))
 
-(defn get-history [id request]
-  (println "customer-history: " (c/get-customer-history (read-string id)))
+(defn get-history [id request]  
   (let [customer-history (c/get-customer-history (read-string id))]
     (response (array-map :is ["event" "list"]
                          :numberOfItems (count customer-history)
