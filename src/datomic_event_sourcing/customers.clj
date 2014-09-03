@@ -52,9 +52,10 @@
              :town (:customer/address-town entity)
              :postcode (:customer/address-postcode entity)))
 
-(defn process-changes-map-entry [changes-map key]
-  {:field key
-   :change (key changes-map)})
+
+(defn process-changes-map-entry [changes-map fieldname]
+  {:field fieldname
+   :mutation (fieldname changes-map)})
 
 (defn process-changes-map [changes-map]
   (map (partial process-changes-map-entry changes-map) (keys changes-map)))

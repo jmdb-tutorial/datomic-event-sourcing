@@ -13,8 +13,7 @@
 <body ng-controller="CustomerController">
 <div class="row">
     <div class="large-12 columns">
-        <h1>Customer Details for <b ng-model="customer">{{customer['name']}}</b
-                ></h1>
+        <h1>Customer "<b ng-model="customer">{{customer['name']}}</b>"</h1>
     </div>
 </div>
 
@@ -67,7 +66,13 @@
             <td>{{event['type']}}</a></td>
             <td>{{event['user-id']}}</a></td>
             <td>{{event['timestamp']}}</td>
-            <td><span ng-repeat="change in event['changes']">{{change}}<br/></span></td>
+            <td>
+                <table>
+                <tr ng-repeat="change in event['changes']">
+                    <td width="250px"><b>{{change['field']}}</b></td><td>{{change['mutation']['old']}}</td><td>--></td><td>{{change['mutation']['new']}}</td>
+                </tr>
+                </table>
+            </td>
         </tr>
 
         </tbody>
