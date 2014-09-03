@@ -1,4 +1,5 @@
 (ns datomic-event-sourcing.customers
+  (:use clojure.pprint)
   (:require [datomic.api :as d]
             [datomic-event-sourcing.util :as util]))
 
@@ -56,7 +57,7 @@
           (array-map :type (:event-type item)
                             :user-id (:user-id item)
                             :timestamp (:timestamp item)
-                             :changes (:changes item)))
+                            :changes (:changes item)))
         changes-col))
 
 (defn get-all-customers []

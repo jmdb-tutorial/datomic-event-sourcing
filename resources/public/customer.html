@@ -54,9 +54,9 @@
     <table>
         <thead>
         <tr>
-            <th>Event</th>
-            <th>User Id</th>
-            <th>Timestamp</th>
+            <th width="150px">Event</th>
+            <th width="100px">User Id</th>
+            <th width="180px">Timestamp</th>
             <th>Changes</th>
         </tr>
         </thead>
@@ -67,7 +67,8 @@
             <td>{{event['type']}}</a></td>
             <td>{{event['user-id']}}</a></td>
             <td>{{event['timestamp']}}</td>
-            <td><pre>{{event['changes']}}</pre></td>
+            <td>{{event['changes']}}</td>
+            <td><span ng-repeat="change in event['changes']">{{change}}<br/></span></td>
         </tr>
 
         </tbody>
