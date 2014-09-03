@@ -6,7 +6,8 @@
             [ring.middleware.json :as middleware]           
             [compojure.route :as route]                        
             [ring.adapter.jetty :as jetty]
-            [datomic-event-sourcing.views :as v])
+            [datomic-event-sourcing.views :as v]
+            [datomic-event-sourcing.test-data :as td])
   (:gen-class))
 
 (defroutes app-routes
@@ -28,7 +29,7 @@
 
 )
 
-
+(td/reset-test-data)
 
 (def app
   (-> (handler/api app-routes)

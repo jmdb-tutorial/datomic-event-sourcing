@@ -11,7 +11,7 @@
 
 (defn transact-entity
   [conn tempid tx]
-  (get-inserted-entity tempid @(d/transact conn tx meta-data)))
+  (get-inserted-entity tempid @(d/transact conn tx)))
 
 (defn record-event
   [conn tempid tx event-type user-id]

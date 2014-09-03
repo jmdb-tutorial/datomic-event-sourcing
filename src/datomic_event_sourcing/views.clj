@@ -11,14 +11,16 @@
   (conj {:history (local-url request (format "/api/history/%s" (:id customer)))}
         customer))
 
-(defn remove-tags [customer]
-  (dissoc customer :is))
+(defn inline [request customer]
+  (-> customer
+      (dissoc :is)
+      (conj {:more (local-url request (format "/api/customers/%s" (:id customer)))})))
 
 (defn load-customers [request]
   (->> 
    (c/get-all-customers)
-   (map (fn [customer] (add-customer-links request)))
-   (map (fn [customer] (remove-tags)))))
+   (map (fn [customer] (add-customer-links request customer)))
+   (map (fn [customer] (inline request customer)))))
 
 (defn get-customers [request]
   (let [all-customers (load-customers request)]
