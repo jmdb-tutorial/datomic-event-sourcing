@@ -52,12 +52,19 @@
              :town (:customer/address-town entity)
              :postcode (:customer/address-postcode entity)))
 
+(defn process-changes-map-entry [changes-map key]
+  {:field key
+   :change (key changes-map)})
+
+(defn process-changes-map [changes-map]
+  (map (partial process-changes-map-entry changes-map) (keys changes-map)))
+
 (defn map-history [changes-col]
    (map (fn [item]
           (array-map :type (:event-type item)
                             :user-id (:user-id item)
                             :timestamp (:timestamp item)
-                            :changes (:changes item)))
+                            :changes (process-changes-map (:changes item))))
         changes-col))
 
 (defn get-all-customers []
