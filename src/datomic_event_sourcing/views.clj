@@ -37,3 +37,4 @@
     (response (array-map :is ["event" "list"]
                          :numberOfItems (count customer-history)
                          :items customer-history))))
+

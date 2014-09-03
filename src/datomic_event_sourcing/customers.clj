@@ -58,7 +58,7 @@
    :mutation (fieldname changes-map)})
 
 (defn process-changes-map [changes-map]
-  (map (partial process-changes-map-entry changes-map) (keys changes-map)))
+  (sort-by :field (map (partial process-changes-map-entry changes-map) (keys changes-map))))
 
 (defn map-history [changes-col]
    (map (fn [item]
