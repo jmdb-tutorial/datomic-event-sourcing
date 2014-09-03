@@ -11,7 +11,7 @@
   (conj {:history (local-url request (format "/api/history/%s" (:id customer)))}
         customer))
 
-(defn inline [request customer]
+(defn inline-representation [request customer]
   (-> customer
       (dissoc :is)
       (conj {:more (local-url request (format "/api/customers/%s" (:id customer)))})))
@@ -20,7 +20,7 @@
   (->> 
    (c/get-all-customers)
    (map (fn [customer] (add-customer-links request customer)))
-   (map (fn [customer] (inline request customer)))))
+   (map (fn [customer] (inline-representation request customer)))))
 
 (defn get-customers [request]
   (let [all-customers (load-customers request)]
@@ -29,14 +29,8 @@
                          :items all-customers))))
 
 (defn get-customer [id request]
-  (response (array-map :is "customer"
-                       :id id
-                       :name "XXXXXXXX"
-                       :email "xxx@xxx.xxx"
-                       :address-line-1 "XXXXXXXX"
-                       :town "XXXXX"
-                       :postcode "XX0 0XX"
-                       :history (local-url request (format "/api/history/%s" id)))))
+  (response (->> (c/get-customer-by-id (read-string id))
+                 (add-customer-links request))))
 
 (defn get-history [id request]
   (response (array-map :is ["event" "list"]

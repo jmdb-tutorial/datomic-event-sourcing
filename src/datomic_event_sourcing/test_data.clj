@@ -1,7 +1,7 @@
 (ns datomic-event-sourcing.test-data
   (:use clojure.pprint)
   (:require [datomic-event-sourcing.util :as util]
-            [datomic-event-sourcing.customers :as c]))
+            [datomic-event-sourcing.customers :as c]))  
  
 
 (defn reset-test-data []

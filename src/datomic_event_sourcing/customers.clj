@@ -43,7 +43,8 @@
        user-id))))
 
 (defn map-customer [entity]
-  (array-map :is "customer"
+  (println "entity->customer: " entity)
+  (array-map :is ["customer"]
              :id (:db/id entity)
              :name (:customer/name entity)
              :email (:customer/email entity)
@@ -68,7 +69,7 @@
 
 (defn get-customer-by-id [customer-id]
   (let [conn (d/connect uri)]
-    (map-customer (d/entity (d/db conn customer-id)))))
+    (map-customer (d/entity (d/db conn) customer-id))))
 
 (defn get-customer-history [customer-id]
   (let [conn (d/connect uri)]
