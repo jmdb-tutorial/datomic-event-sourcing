@@ -43,7 +43,6 @@
        user-id))))
 
 (defn map-customer [entity]
-  (println "entity->customer: " entity)
   (array-map :is ["customer"]
              :id (:db/id entity)
              :name (:customer/name entity)
@@ -53,15 +52,12 @@
              :postcode (:customer/address-postcode entity)))
 
 (defn map-history [changes-col]
-  (let [items (map (fn [item]
-                     (array-map :type (:event-type item)
-                                :user-id (:user-id item)
-                                :timestamp (:timestamp item)
-                                :changes (:changes item)))
-                   changes-col)]
-    (array-map :is ["event" "list"]
-               :numberOfItems (count items)
-               :items items)))
+   (map (fn [item]
+          (array-map :type (:event-type item)
+                            :user-id (:user-id item)
+                            :timestamp (:timestamp item)
+                             :changes (:changes item)))
+        changes-col))
 
 (defn get-all-customers []
   (let [conn (d/connect uri)]
@@ -73,6 +69,6 @@
 
 (defn get-customer-history [customer-id]
   (let [conn (d/connect uri)]
-    (util/changeset-for customer-id (d/db conn))))
+    (map-history (util/changeset-for customer-id (d/db conn)))))
 
 

@@ -33,7 +33,8 @@
                  (add-customer-links request))))
 
 (defn get-history [id request]
-  (response (array-map :is ["event" "list"]
-                       :numberOfItems 2
-                       :items [{:type "create-customer" :user-id "XXXX" :timestamp "XXXX" :changes {:old "foo" :new "bar"}}
-                                 {:type "change-address" :user-id "XXXX" :timestamp "XXXX" :changes {}}])))
+  (println "customer-history: " (c/get-customer-history (read-string id)))
+  (let [customer-history (c/get-customer-history (read-string id))]
+    (response (array-map :is ["event" "list"]
+                         :numberOfItems (count customer-history)
+                         :items customer-history))))
