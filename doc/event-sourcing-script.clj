@@ -20,15 +20,25 @@
     (util/record-event
      conn
      tempid
-     [[:db/add tempid :customer/email "xxx@xxx.xxx"]
-      [:db/add tempid :customer/name "Xxx Xxxx"]
-      [:db/add tempid :customer/address-line-1 "0 Xxxx Xxxxx"]
-      [:db/add tempid :customer/address-town "Xxxxx"]
-      [:db/add tempid :customer/address-postcode "XX00 0XX"]]
+     [{:db/id tempid 
+       :customer/email "xxx@xxx.xxx"
+       :customer/name "Xxx Xxxx"
+       :customer/address-line-1 "0 Xxxx Xxxxx"
+       :customer/address-town "Xxxxx"
+       :customer/address-postcode "XX00 0XX"}]
      "create-customer"
      "user-01")))
 
 (def customer-01-id (:db/id customer-01))
+
+(d/q '[:find ?c :where [?c :customer/email "xxx@xxx.xxx"]] (d/db conn))
+
+(def customer-01-loaded (d/entity (d/db conn) customer-01-id))
+
+(pprint customer-01-loaded)
+
+(:customer/address-line-1 customer-01-loaded)
+
 
 (util/record-event
  conn
@@ -40,13 +50,9 @@
   "change-address"
   "user-02")
 
-(d/q '[:find ?c :where [?c :customer/email "xxx@xxx.xxx"]] (d/db conn))
-
 
 (pprint (util/changeset-for customer-01-id (d/db conn)))
 
-(def customer-01-loaded (d/entity (d/db conn) customer-01-id))
 
-(:customer/address-line-1 customer-01-loaded)
 
 
