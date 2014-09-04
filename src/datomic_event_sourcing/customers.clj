@@ -43,6 +43,17 @@
        "change-address"
        user-id))))
 
+(defn change-email [user-id customer-id {:keys [email]}]
+  (let [conn (d/connect uri)]
+    (let [tempid (d/tempid :db.part/user)]      
+      (util/record-event
+       conn
+       customer-id
+       [{:db/id customer-id 
+         :customer/email email}]
+       "change-email"
+       user-id))))
+
 (defn map-customer [entity]
   (array-map :is ["customer"]
              :id (:db/id entity)
@@ -70,7 +81,7 @@
 
 (defn get-all-customers []
   (let [conn (d/connect uri)]
-    (map map-customer (sort-by :customer/email (util/decorate-results (d/q '[:find ?c :where [?c :customer/email _]] (d/db conn)) conn)))))
+    (map map-customer (sort-by :customer/name (util/decorate-results (d/q '[:find ?c :where [?c :customer/email _]] (d/db conn)) conn)))))
 
 (defn get-customer-by-id [customer-id]
   (let [conn (d/connect uri)]
