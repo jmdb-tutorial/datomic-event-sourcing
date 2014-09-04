@@ -65,7 +65,7 @@
 
 
 (defn process-changes-map-entry [changes-map fieldname]
-  {:field fieldname
+  {:field (last (. (name fieldname) split "/"))
    :mutation (fieldname changes-map)})
 
 (defn process-changes-map [changes-map]
