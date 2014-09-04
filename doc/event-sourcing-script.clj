@@ -16,35 +16,37 @@
 (pprint @(d/transact conn schema-tx))
 
 (let [tempid (d/tempid :db.part/user)]
-  (def customer-bob
+  (def customer-01
     (util/record-event
      conn
      tempid
-     [[:db/add tempid :customer/email "bob@foo.com"]
-      [:db/add tempid :customer/name "Bob Bobby"]
-      [:db/add tempid :customer/address-line-1 "1 Some Street"]
-      [:db/add tempid :customer/address-town "Some Town"]
-      [:db/add tempid :customer/address-postcode "RE45 2WE"]]
+     [[:db/add tempid :customer/email "xxx@xxx.xxx"]
+      [:db/add tempid :customer/name "Xxx Xxxx"]
+      [:db/add tempid :customer/address-line-1 "0 Xxxx Xxxxx"]
+      [:db/add tempid :customer/address-town "Xxxxx"]
+      [:db/add tempid :customer/address-postcode "XX00 0XX"]]
      "create-customer"
-     "johnnyfoo")))
+     "user-01")))
 
-(def customer-bob-id (:db/id customer-bob))
+(def customer-01-id (:db/id customer-01))
 
 (util/record-event
  conn
- customer-bob-id
- [{:db/id customer-bob-id 
-   :customer/address-line-1 "2 Some New Street"
-   :customer/address-town "Some New Town"
-   :customer/address-postcode "GH45 2SD"}]
+ customer-01-id
+ [{:db/id customer-01-id 
+   :customer/address-line-1 "0 NEW Xxxxx"
+   :customer/address-town "NEW Xxxxxx"
+   :customer/address-postcode "YY00 0YY"}]
   "change-address"
-  "jennybar")
+  "user-02")
+
+(d/q '[:find ?c :where [?c :customer/email "xxx@xxx.xxx"]] (d/db conn))
 
 
-(pprint (util/changeset-for customer-bob-id (d/db conn)))
+(pprint (util/changeset-for customer-01-id (d/db conn)))
 
-(def bob (d/entity (d/db conn) customer-bob-id))
+(def customer-01-loaded (d/entity (d/db conn) customer-01-id))
 
-(:customer/address-line-1 bob)
+(:customer/address-line-1 customer-01-loaded)
 
 
