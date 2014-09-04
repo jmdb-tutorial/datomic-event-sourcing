@@ -13,7 +13,7 @@
 
 
 (def schema-tx (read-string (slurp "db/schema.dtm")))
-@(d/transact conn schema-tx)
+(pprint @(d/transact conn schema-tx))
 
 (let [tempid (d/tempid :db.part/user)]
   (def customer-bob
