@@ -8,13 +8,12 @@
                        :customers (local-url request "/api/customers"))))
 
 (defn add-customer-links [request customer]
-  (conj {:history (local-url request (format "/api/history/%s" (:id customer)))}
-        customer))
+  (assoc customer :history (local-url request (format "/api/history/%s" (:id customer)))))
 
 (defn inline-representation [request customer]
   (-> customer
       (dissoc :is)
-      (conj {:more (local-url request (format "/api/customers/%s" (:id customer)))})))
+      (assoc :more (local-url request (format "/api/customers/%s" (:id customer))))))
 
 (defn load-customers [request]
   (->> 

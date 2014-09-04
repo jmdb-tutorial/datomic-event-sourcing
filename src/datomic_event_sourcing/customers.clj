@@ -65,7 +65,7 @@
 
 
 (defn process-changes-map-entry [changes-map fieldname]
-  {:field (last (. (name fieldname) split "/"))
+  {:field (last (clojure.string/split (name fieldname) #"/"))
    :mutation (fieldname changes-map)})
 
 (defn process-changes-map [changes-map]
